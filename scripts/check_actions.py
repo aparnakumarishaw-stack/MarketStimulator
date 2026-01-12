@@ -38,18 +38,46 @@ for r in runs[:5]:
 
 # Fetch job-level details for the latest run
 run_id = latest.get('id')
-if run_id:
+
+import time
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--wait', action='store_true', help='Poll until run completes')
+args = parser.parse_args()
+
+def print_jobs(run_id):
     jobs_url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/runs/{run_id}/jobs"
     req = Request(jobs_url, headers={"User-Agent": "MarketStimulator-checker"})
     try:
         with urlopen(req, timeout=10) as jr:
             jdata = json.load(jr)
-        jobs = jdata.get('jobs', [])
-        if jobs:
-            print('\nJobs for latest run:')
-            for job in jobs:
-                print(f"Job: {job.get('name')} status={job.get('status')} conclusion={job.get('conclusion')} url={job.get('html_url')}")
-                for step in job.get('steps', []):
-                    print(f"  - Step: {step.get('name')} | status={step.get('status')} | concl={step.get('conclusion')}")
     except Exception as e:
         print('Failed to fetch job details:', e)
+        return
+    jobs = jdata.get('jobs', [])
+    if jobs:
+        print('\nJobs for latest run:')
+        for job in jobs:
+            print(f"Job: {job.get('name')} status={job.get('status')} conclusion={job.get('conclusion')} url={job.get('html_url')}")
+            for step in job.get('steps', []):
+                print(f"  - Step: {step.get('name')} | status={step.get('status')} | concl={step.get('conclusion')}")
+
+if run_id:
+    print_jobs(run_id)
+
+    if args.wait:
+        # poll the run until it is completed
+        run_url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/runs/{run_id}"
+        while True:
+            req = Request(run_url, headers={"User-Agent": "MarketStimulator-checker"})
+            with urlopen(req, timeout=10) as rr:
+                rdata = json.load(rr)
+            status = rdata.get('status')
+            conclusion = rdata.get('conclusion')
+            print(f"Run status: {status}, conclusion: {conclusion}")
+            if status == 'completed':
+                print('Run completed. Refreshing job details...')
+                print_jobs(run_id)
+                break
+            time.sleep(5)
