@@ -35,3 +35,21 @@ print(f"  started: {latest.get('run_started_at')}")
 print('\nRecent runs:')
 for r in runs[:5]:
     print(f" - {r.get('name')} [{r.get('head_branch')}] status={r.get('status')} concl={r.get('conclusion')} url={r.get('html_url')}")
+
+# Fetch job-level details for the latest run
+run_id = latest.get('id')
+if run_id:
+    jobs_url = f"https://api.github.com/repos/{OWNER}/{REPO}/actions/runs/{run_id}/jobs"
+    req = Request(jobs_url, headers={"User-Agent": "MarketStimulator-checker"})
+    try:
+        with urlopen(req, timeout=10) as jr:
+            jdata = json.load(jr)
+        jobs = jdata.get('jobs', [])
+        if jobs:
+            print('\nJobs for latest run:')
+            for job in jobs:
+                print(f"Job: {job.get('name')} status={job.get('status')} conclusion={job.get('conclusion')} url={job.get('html_url')}")
+                for step in job.get('steps', []):
+                    print(f"  - Step: {step.get('name')} | status={step.get('status')} | concl={step.get('conclusion')}")
+    except Exception as e:
+        print('Failed to fetch job details:', e)
