@@ -1,0 +1,28 @@
+# Virtual environments
+venv/
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest, coverage
+.pytest_cache/
+.coverage
+
+# Artifacts and logs
+artifacts/
+market_simulation.png
+price_impact_example.png
+
+# Notebooks outputs
+.ipynb_checkpoints/
+notebooks/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/

@@ -1,0 +1,32 @@
+[
+  [
+    {"side": "buy", "price": 99.0, "size": 2.0},
+    {"side": "sell", "price": 105.0, "size": 1.0},
+    {"side": "sell", "price": 106.0, "size": 2.0}
+  ],
+  [
+    {"side": "buy", "price": 99.5, "size": 3.0},
+    {"side": "sell", "price": 104.5, "size": 1.0},
+    {"side": "sell", "price": 106.0, "size": 1.5}
+  ],
+  [
+    {"side": "buy", "price": 100.0, "size": 4.0},
+    {"side": "sell", "price": 104.0, "size": 2.0},
+    {"side": "sell", "price": 106.0, "size": 3.0}
+  ],
+  [
+    {"side": "buy", "price": 99.8, "size": 2.0},
+    {"side": "sell", "price": 103.5, "size": 5.0},
+    {"side": "sell", "price": 104.0, "size": 8.0}
+  ],
+  [
+    {"side": "buy", "price": 99.9, "size": 2.0},
+    {"side": "sell", "price": 102.5, "size": 10.0},
+    {"side": "sell", "price": 103.0, "size": 10.0}
+  ],
+  [
+    {"side": "buy", "price": 99.6, "size": 1.0},
+    {"side": "sell", "price": 101.0, "size": 6.0},
+    {"side": "sell", "price": 102.0, "size": 6.0}
+  ]
+]
