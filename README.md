@@ -20,6 +20,8 @@ Follow these steps to set up a local environment (recommended):
    pip install -r requirements.txt
    ```
 
+[![CI](https://github.com/aparnakumarishaw-stack/MarketStimulator/actions/workflows/ci.yml/badge.svg)](https://github.com/aparnakumarishaw-stack/MarketStimulator/actions/workflows/ci.yml)
+
 ## Run the simulation
 
 With the venv active, run:
