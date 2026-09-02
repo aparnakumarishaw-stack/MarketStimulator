@@ -1,5 +1,5 @@
 # MarketSimulator
-Simulates a simplified exchange where multiple "bot" agents trade a single stock.
+Limit Order Book (LOB) matching engine & multi-agent trading simulator built in Python.
 
 ## Setup (Pro)
 Follow these steps to set up a local environment (recommended):
